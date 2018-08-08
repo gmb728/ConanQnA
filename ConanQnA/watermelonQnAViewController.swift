@@ -8,10 +8,12 @@
 
 import UIKit
 import GameKit
+import AVFoundation
 
 
 
 class watermelonQnAViewConrtoller: UIViewController{
+    var player : AVPlayer?
         var questions = [Question]()
         var questionCount = 0
         var grade = 0
@@ -88,6 +90,9 @@ class watermelonQnAViewConrtoller: UIViewController{
     
     //question and choices
     override func viewDidLoad(){
+        if let url = Bundle.main.url(forResource: "唐紅的戀歌主題曲", withExtension: "mp4") {
+            player = AVPlayer(url: url)
+            player?.play()
         super.viewDidLoad()
         gradeView.isHidden = true
         questions.append(Question(description: "請問在2004年第八部 《銀翼的奇術師》的基德扮成哪一位先生？", answer: "新庄先生", choices: ["藤野先生", "新庄先生", "工藤新一"]))
@@ -100,6 +105,8 @@ class watermelonQnAViewConrtoller: UIViewController{
         questions.append(Question(description: "請問在2010年第十四部《天空的劫難船》爆炸研究所的案件發生在哪？", answer: "大阪", choices: ["東京", "九州", "大阪"]))
         questions.append(Question(description: "請問在2008年第十二部《戰慄的樂譜裡》爆炸演奏的歌曲為何？", answer: "奇異恩典", choices: ["奇異恩典", "恩典之路", "感恩的心"]))
         questions.append(Question(description: "請問柯南的作者是誰？", answer: "青山剛昌", choices: ["尾田榮一郎", "金成陽三郎", "青山剛昌"]))
+        
+       
    
         //question random
         shuffledDistribution = GKShuffledDistribution(lowestValue: 0, highestValue: questions.count - 1)
@@ -115,13 +122,7 @@ class watermelonQnAViewConrtoller: UIViewController{
         }
     }
     
-        override func didReceiveMemoryWarning() {
-            super.didReceiveMemoryWarning()
-            
-            // Dispose of any resources that can be recreated.
-        }
-
     
 }
 
-
+}
